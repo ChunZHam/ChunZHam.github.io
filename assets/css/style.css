@@ -1,9 +1,19 @@
+.construction-notice {
+  background: #fff8df;
+  color: #423713;
+  padding: 12px 16px !important;
+  border-radius: 6px;
+  font-size: 14px;
+  text-shadow: none !important;
+}
+
 .profile-pic {
   position: relative;
   max-width:130px;
   max-height:130px;
-  width: auto;
-  height: auto;
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
   overflow: hidden;
   /* display: inline-block; */
   
@@ -26,6 +36,35 @@
   /* margin-inline-end: auto;  */
   bottom: 0; 
   right: 0;
+}
+
+/* Match the homepage photo width to its greeting, with both centered together. */
+#intro .intro-heading {
+  display: grid;
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+#intro .intro-heading h2 {
+  margin: 16px 0 12px;
+  text-align: center;
+}
+#intro .intro-photo {
+  display: block;
+  width: 0;
+  min-width: 100%;
+  height: 30vh;
+  object-fit: cover;
+  object-position: center 35%;
+  border-radius: 6px;
+}
+#intro.section {
+  height: auto;
+  min-height: 100vh;
+}
+#intro.section .container {
+  position: relative;
+  padding-block: 1px 48px;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Poiret+One);
@@ -328,7 +367,7 @@ h3 {
   color: white;
   font-weight: 200;
   left: 0;
-  position: absolute;
+  position: relative;
   top: 0;
 }
 
