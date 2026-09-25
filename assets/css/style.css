@@ -46,7 +46,7 @@
   gap: 5%;
   width: 100%;
 }
-.hero-copy { flex: 0 0 63%; }
+.hero-copy { flex: 0 0 63%; min-width: 0; text-align: center; }
 .hero-photo-wrap { flex: 1 1 32%; }
 #intro .intro-heading {
   display: block;
@@ -56,7 +56,7 @@
 }
 #intro .intro-heading h2 {
   margin: 16px 0 12px;
-  text-align: left;
+  text-align: center;
 }
 #intro .intro-photo {
   display: block;
@@ -64,6 +64,41 @@
   height: auto;
   object-fit: contain;
   border-radius: 6px;
+}
+#intro .hero-content { margin: 50px auto 0; }
+#intro .social {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  margin: 24px auto;
+}
+#intro .social > a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 190px;
+  color: white;
+}
+#intro .social .icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 50px;
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  background: #fff;
+}
+#intro .social .github { color: #111; }
+#intro .social .social-label {
+  display: block;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
 }
 .blog-icon { padding: 0; overflow: hidden; }
 .blog-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
