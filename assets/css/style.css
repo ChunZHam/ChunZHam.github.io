@@ -39,18 +39,18 @@
   right: 0;
 }
 
-/* Match the homepage photo width to its greeting, with both centered together. */
+/* Keep the full homepage photograph left-aligned above the greeting. */
 #intro .intro-heading {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   width: max-content;
   max-width: 100%;
-  margin-inline: auto;
+  margin-inline: 0;
 }
 #intro .intro-heading h2 {
   margin: 16px 0 12px;
-  text-align: center;
+  text-align: left;
 }
 #intro .intro-photo {
   display: block;
