@@ -45,10 +45,15 @@
   align-items: center;
   gap: 5%;
   width: 100%;
-  margin-top: 36px;
 }
 .hero-copy { flex: 0 0 63%; min-width: 0; text-align: left; }
 .hero-photo-wrap { flex: 1 1 32%; }
+.experience-organization {
+  float: right;
+  margin-left: 1rem;
+  font-size: 0.78em;
+  color: #795548;
+}
 #intro .intro-heading {
   display: block;
   width: 100%;
