@@ -45,6 +45,7 @@
   align-items: center;
   gap: 5%;
   width: 100%;
+  margin-top: 36px;
 }
 .hero-copy { flex: 0 0 63%; min-width: 0; text-align: left; }
 .hero-photo-wrap { flex: 1 1 32%; }
@@ -68,10 +69,12 @@
 #intro .hero-content { margin: 50px auto 0; }
 #intro .social {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 24px;
   margin: 24px auto;
+  width: max-content;
 }
 #intro .social > a {
   display: flex;
