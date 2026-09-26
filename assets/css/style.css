@@ -74,19 +74,19 @@
 #intro .hero-content { margin: 50px auto 0; }
 #intro .social {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 24px;
+  gap: 28px;
   margin: 24px 0;
-  width: max-content;
+  width: auto;
 }
 #intro .social > a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  max-width: 190px;
+  width: 140px;
   color: white;
 }
 #intro .social .icon-btn {
@@ -107,9 +107,31 @@
   font-size: 14px;
   line-height: 1.4;
   text-align: left;
+  white-space: nowrap;
 }
 .blog-icon { padding: 0; overflow: hidden; }
 .blog-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.article-links { margin-top: 8px; }
+.article-links li { margin-bottom: 4px; }
+.experience-organization { margin-bottom: 8px; }
+.role { margin-top: 12px; }
+
+/* Long-form bilingual article reader. The images remain at reading size and
+   scroll vertically, while the Chinese and English columns stay side by side. */
+.article-page { background: #f3f7f7; color: #263238; }
+.article-reader { max-width: 1500px; margin: 0 auto; padding: 28px 24px 64px; }
+.article-reader h1 { margin: 0 0 24px; text-align: center; font-size: 28px; color: #00695c; }
+.article-reader h1 span { display: block; margin-top: 6px; font-size: 18px; font-weight: 400; color: #546e7a; }
+.article-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.article-columns figure { margin: 0; background: #fff; padding: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+.article-columns figcaption { margin: 0 0 10px; text-align: center; font-size: 15px; color: #607d8b; }
+.article-columns img { display: block; width: 100%; height: auto; }
+@media (max-width: 700px) {
+  .article-reader { padding: 20px 10px 40px; }
+  .article-columns { grid-template-columns: 1fr; }
+  #intro .social { gap: 12px; }
+  #intro .social > a { width: 120px; }
+}
 #intro.section {
   height: auto;
   min-height: 100vh;
