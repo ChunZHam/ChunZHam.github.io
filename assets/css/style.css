@@ -118,13 +118,29 @@
 .documentary-role { clear: both; margin-top: 12px; }
 .template-experience-card { display: none; }
 #legacy-projects { display: none; }
-.academia-card .academia-heading { display: flex; align-items: center; }
-.academia-logo-col { display: flex; align-items: center; justify-content: center; }
-.academia-logo { max-width: 120px; max-height: 72px; object-fit: contain; }
-.academia-card .card-title { font-size: 1.08em; }
-.academia-card .experience-organization { margin-top: 6px; }
-.academia-card .card-action { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.academia-card .academia-heading { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 20px; align-items: start; margin: 0 0 20px; }
+.academia-card .academia-heading > .col { width: auto; margin: 0; padding: 0; min-width: 0; }
+.academia-logo-col { display: flex; align-items: flex-start; justify-content: center; }
+.academia-logo { display: block; max-width: 100%; max-height: 72px; object-fit: contain; }
+.academia-card .card-title { display: block; font-size: 1.08em; }
+.academia-card .experience-organization { display: block; float: none; text-align: right; margin: 8px 0 0; }
+.academia-card .academia-heading p { margin: 0; padding: 0; text-indent: 0; }
+.academia-card .card-title a.hoverline { padding: 0; }
+.academia-card .card-action { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.academia-card .tool-list { columns: 2; column-gap: 36px; }
+.academia-card .tool-list li { break-inside: avoid; }
 #skills .card:not(.skills-summary-card) { display: none; }
+.skill-logo-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 16px; }
+.skill-logo-grid > .col { width: auto; float: none; margin: 0; padding: 0; min-height: 112px; }
+#skills .skill-logo-grid img.responsive-img { display: block; width: 88px; height: 72px; object-fit: contain; margin: 0 auto 12px; padding: 0; }
+.skill-logo-grid span { display: block; }
+@media (max-width: 600px) {
+  .academia-card .academia-heading { grid-template-columns: 64px minmax(0, 1fr); gap: 14px; }
+  .academia-logo { max-height: 56px; }
+  .academia-card .tool-list { columns: 1; }
+  .academia-card .card-action { align-items: flex-start; gap: 8px 16px; }
+  .skill-logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 .legacy-education { display: none; }
 
 body.gallery-open { overflow: hidden; }
