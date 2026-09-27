@@ -115,7 +115,7 @@
 .article-links li { margin-bottom: 4px; }
 .experience-organization { margin-bottom: 8px; }
 .role { margin-top: 12px; }
-.documentary-role { margin-top: 36px; }
+.documentary-role { clear: both; margin-top: 12px; }
 .template-experience-card { display: none; }
 #legacy-projects { display: none; }
 .academia-card .academia-heading { display: flex; align-items: center; }
@@ -123,6 +123,9 @@
 .academia-logo { max-width: 120px; max-height: 72px; object-fit: contain; }
 .academia-card .card-title { font-size: 1.08em; }
 .academia-card .experience-organization { margin-top: 6px; }
+.academia-card .card-action { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+#skills .card:not(.skills-summary-card) { display: none; }
+.legacy-education { display: none; }
 
 body.gallery-open { overflow: hidden; }
 .photography-gallery {
