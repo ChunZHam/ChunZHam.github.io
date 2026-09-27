@@ -66,10 +66,12 @@
 }
 #intro .intro-photo {
   display: block;
-  width: 100%;
+  width: 120%;
+  max-width: none;
   height: auto;
   object-fit: contain;
   border-radius: 6px;
+  margin-left: -10%;
 }
 #intro .hero-content { margin: 50px auto 0; }
 #intro .social {
@@ -115,7 +117,7 @@
 .article-links li { margin-bottom: 4px; }
 .experience-organization { margin-bottom: 8px; }
 .role { margin-top: 12px; }
-.documentary-role { clear: both; margin-top: 12px; }
+.documentary-role { clear: both; margin-top: 20px; }
 .template-experience-card { display: none; }
 #legacy-projects { display: none; }
 .academia-card .academia-heading { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 20px; align-items: start; margin: 0 0 20px; }
