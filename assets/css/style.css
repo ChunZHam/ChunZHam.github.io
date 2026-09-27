@@ -115,6 +115,14 @@
 .article-links li { margin-bottom: 4px; }
 .experience-organization { margin-bottom: 8px; }
 .role { margin-top: 12px; }
+.documentary-role { margin-top: 36px; }
+.template-experience-card { display: none; }
+#legacy-projects { display: none; }
+.academia-card .academia-heading { display: flex; align-items: center; }
+.academia-logo-col { display: flex; align-items: center; justify-content: center; }
+.academia-logo { max-width: 120px; max-height: 72px; object-fit: contain; }
+.academia-card .card-title { font-size: 1.08em; }
+.academia-card .experience-organization { margin-top: 6px; }
 
 body.gallery-open { overflow: hidden; }
 .photography-gallery {

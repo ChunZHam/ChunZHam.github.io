@@ -22,10 +22,15 @@
     let loaded = 0;
     Promise.all(files.map((file, index) => new Promise((resolve) => {
       const img = new Image();
-      img.onload = img.onerror = function () {
+      img.onload = function () {
         loaded += 1;
         progress.textContent = `Loading photographs ${loaded} / ${files.length}`;
-        resolve(img.naturalWidth ? { img, index } : null);
+        resolve({ img, index });
+      };
+      img.onerror = function () {
+        loaded += 1;
+        progress.textContent = `Loading photographs ${loaded} / ${files.length}`;
+        resolve(null);
       };
       img.src = '/assets/photography/' + file;
     }))).then((results) => {
