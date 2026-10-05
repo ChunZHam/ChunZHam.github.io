@@ -12,13 +12,15 @@
   const close = document.getElementById('photography-close');
   let opener = null;
   let prepared = false;
+  let preparing = false;
 
   function showGallery() {
     gallery.classList.add('is-open');
     gallery.setAttribute('aria-hidden', 'false');
     document.body.classList.add('gallery-open');
     close.focus();
-    if (prepared) return;
+    if (prepared || preparing) return;
+    preparing = true;
     let loaded = 0;
     Promise.all(files.map((file, index) => new Promise((resolve) => {
       const img = new Image();
@@ -49,6 +51,7 @@
       loading.hidden = true;
       track.classList.add('is-ready');
       prepared = true;
+      preparing = false;
     });
   }
 
@@ -56,6 +59,9 @@
     gallery.classList.remove('is-open');
     gallery.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('gallery-open');
+    if (window.location.hash === '#photography-gallery') {
+      history.replaceState(null, '', window.location.pathname + window.location.search + '#experience');
+    }
     if (opener) opener.focus();
   }
 
@@ -63,6 +69,7 @@
     link.addEventListener('click', (event) => {
       event.preventDefault();
       opener = link;
+      history.replaceState(null, '', '#photography-gallery');
       showGallery();
     });
   });
@@ -74,4 +81,12 @@
       track.scrollBy({ left: (event.key === 'ArrowRight' ? 1 : -1) * track.clientWidth, behavior: 'smooth' });
     }
   });
+  function openFromAddress() {
+    if (window.location.hash === '#photography-gallery') {
+      opener = document.querySelector('.photography-open');
+      showGallery();
+    }
+  }
+  window.addEventListener('hashchange', openFromAddress);
+  openFromAddress();
 })();
