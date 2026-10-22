@@ -10,52 +10,61 @@
   const progress = document.getElementById('photography-progress');
   const count = document.getElementById('photography-count');
   const close = document.getElementById('photography-close');
+  const previous = document.getElementById('photography-previous');
+  const next = document.getElementById('photography-next');
+  const visited = new Map();
   let opener = null;
-  let prepared = false;
+  let current = 0;
+
+  function showPhoto(index) {
+    current = (index + files.length) % files.length;
+    count.textContent = (current + 1) + ' / ' + files.length;
+    loading.hidden = false;
+    progress.textContent = 'Loading photograph…';
+    track.replaceChildren();
+    let item = visited.get(current);
+    if (!item) {
+      const img = new Image();
+      img.alt = 'Fushun documentary photograph ' + (current + 1);
+      img.decoding = 'async';
+      item = { img, state: 'loading' };
+      visited.set(current, item);
+      img.onload = function () {
+        item.state = 'ready';
+        if (visited.get(current) === item) loading.hidden = true;
+      };
+      img.onerror = function () {
+        item.state = 'error';
+        if (visited.get(current) === item) {
+          loading.hidden = false;
+          progress.textContent = 'Unable to load this photo. Click to continue.';
+        }
+      };
+      // Only the photograph being previewed receives a source. No preloading.
+      img.src = 'assets/photography/' + files[current];
+    }
+    track.appendChild(item.img);
+    loading.hidden = item.state === 'ready';
+    if (item.state === 'error') {
+      progress.textContent = 'Unable to load this photo. Click to continue.';
+    }
+  }
 
   function showGallery() {
     gallery.classList.add('is-open');
     gallery.setAttribute('aria-hidden', 'false');
     document.body.classList.add('gallery-open');
     close.focus();
-    if (prepared) return;
-    let loaded = 0;
-    Promise.all(files.map((file, index) => new Promise((resolve) => {
-      const img = new Image();
-      img.onload = function () {
-        loaded += 1;
-        progress.textContent = `Loading photographs ${loaded} / ${files.length}`;
-        resolve({ img, index });
-      };
-      img.onerror = function () {
-        loaded += 1;
-        progress.textContent = `Loading photographs ${loaded} / ${files.length}`;
-        resolve(null);
-      };
-      img.src = 'assets/photography/' + file;
-    }))).then((results) => {
-      const valid = results.filter(Boolean);
-      valid.forEach(({ img, index }) => {
-        const slide = document.createElement('figure');
-        slide.className = 'photography-slide';
-        img.alt = `Fushun documentary photograph ${index + 1}`;
-        slide.appendChild(img);
-        const caption = document.createElement('figcaption');
-        caption.textContent = `${index + 1} / ${files.length}`;
-        slide.appendChild(caption);
-        track.appendChild(slide);
-      });
-      count.textContent = `${valid.length} photographs`;
-      loading.hidden = true;
-      track.classList.add('is-ready');
-      prepared = true;
-    });
+    showPhoto(current);
   }
 
   function hideGallery() {
     gallery.classList.remove('is-open');
     gallery.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('gallery-open');
+    if (window.location.hash === '#photography-gallery') {
+      history.replaceState(null, '', window.location.pathname + window.location.search + '#experience');
+    }
     if (opener) opener.focus();
   }
 
@@ -63,15 +72,38 @@
     link.addEventListener('click', (event) => {
       event.preventDefault();
       opener = link;
+      history.replaceState(null, '', '#photography-gallery');
       showGallery();
     });
   });
+  track.addEventListener('click', () => showPhoto(current + 1));
+  previous.addEventListener('click', () => showPhoto(current - 1));
+  next.addEventListener('click', () => showPhoto(current + 1));
   close.addEventListener('click', hideGallery);
   gallery.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') hideGallery();
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
       event.preventDefault();
-      track.scrollBy({ left: (event.key === 'ArrowRight' ? 1 : -1) * track.clientWidth, behavior: 'smooth' });
+      showPhoto(current + (event.key === 'ArrowRight' ? 1 : -1));
+    }
+    if (event.key === 'Tab') {
+      if (event.shiftKey && document.activeElement === close) {
+        event.preventDefault();
+        next.focus();
+      } else if (!event.shiftKey && document.activeElement === next) {
+        event.preventDefault();
+        close.focus();
+      }
     }
   });
+  function openFromAddress() {
+    if (window.location.hash === '#photography-gallery') {
+      opener = document.querySelector('.photography-open');
+      showGallery();
+    } else if (gallery.classList.contains('is-open')) {
+      hideGallery();
+    }
+  }
+  window.addEventListener('hashchange', openFromAddress);
+  openFromAddress();
 })();
