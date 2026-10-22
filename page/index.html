@@ -12,7 +12,7 @@
   <!-- Font Awesome Icon - CSS-->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
   <!-- Custom Styles-->
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=gallery-20261022-2" />
   <title>Chun Zhou | Personal Website</title>
 
 
@@ -929,20 +929,18 @@ of each drug container to estimate the degradation of the drug.
 
   <div id="photography-gallery" class="photography-gallery" role="dialog" aria-modal="true" aria-label="Sample Photography" aria-hidden="true">
     <div class="photography-toolbar">
-      <div><strong>Sample Photography</strong><span id="photography-count">Loading photographs…</span></div>
+      <span id="photography-count" aria-live="polite">1 / 12</span>
       <button type="button" id="photography-close" aria-label="Close photography gallery">×</button>
     </div>
     <div id="photography-loading" class="photography-loading" role="status" aria-live="polite">
-      <p>Fushun’s industrial remains and changing urban landscape</p>
       <span id="photography-progress">Preparing photographs…</span>
     </div>
-    <div id="photography-track" class="photography-track" aria-label="Current photograph"></div>
+    <div id="photography-track" class="photography-track" aria-label="Click the photograph to view the next; loops back to the first"></div>
     <button type="button" id="photography-previous" class="photography-nav photography-previous" aria-label="Previous photograph">‹</button>
     <button type="button" id="photography-next" class="photography-nav photography-next" aria-label="Next photograph">›</button>
-    <p class="photography-hint">Click the photo for the next image · ← → to navigate · Esc to close</p>
   </div>
 
-  <script src="assets/js/photography-gallery.js"></script>
+  <script src="assets/js/photography-gallery.js?v=gallery-20261022-2"></script>
 
   <!-- typed.js -->
   <script src="assets/vendor/typed.js/typed.min.js"></script>

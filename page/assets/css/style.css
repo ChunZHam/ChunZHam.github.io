@@ -151,53 +151,69 @@ body.gallery-open { overflow: hidden; }
   position: fixed;
   inset: 0;
   z-index: 10000;
-  background: #080808;
-  color: #fff;
+  background: #fff;
+  color: #222;
 }
 .photography-gallery.is-open { display: block; }
+/* Controls float above the image; no header/footer takes up photo space. */
 .photography-toolbar {
   position: absolute;
-  inset: 0 0 auto;
+  inset: max(4px, env(safe-area-inset-top)) 8px auto;
   z-index: 3;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: max(12px, env(safe-area-inset-top)) 24px 32px;
-  background: linear-gradient(rgba(0,0,0,.75), transparent);
   pointer-events: none;
 }
-.photography-toolbar strong { display: block; font-size: 18px; }
-.photography-toolbar span { display: block; font-size: 13px; opacity: .8; }
+.photography-toolbar span {
+  padding: 3px 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,.8);
+  font-size: 11px;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
 .photography-toolbar button, .photography-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
-  background: rgba(0,0,0,.45);
-  color: #fff;
+  background: transparent;
+  color: #222;
   width: 44px;
   height: 44px;
   padding: 0;
-  border-radius: 50%;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 1;
   cursor: pointer;
   pointer-events: auto;
+  touch-action: manipulation;
 }
-.photography-gallery button:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.photography-gallery button::before {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.8);
+  z-index: -1;
+}
+.photography-toolbar button { position: relative; z-index: 0; }
+.photography-gallery button:focus { background: transparent; }
+.photography-gallery button:focus-visible { outline: 2px solid #555; outline-offset: -4px; }
 .photography-loading {
   position: absolute;
   inset: 0;
   z-index: 2;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 72px;
+  padding: 48px;
   pointer-events: none;
 }
 .photography-loading[hidden] { display: none; }
-.photography-loading p { font-size: 20px; }
-.photography-loading span { font-size: 15px; opacity: .8; }
+.photography-loading span { font-size: 12px; color: #666; }
 .photography-track {
   position: absolute;
   inset: 0;
@@ -208,21 +224,19 @@ body.gallery-open { overflow: hidden; }
   cursor: pointer;
   touch-action: manipulation;
 }
-.photography-track img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.photography-nav { position: absolute; top: 50%; z-index: 3; transform: translateY(-50%); }
-.photography-previous { left: max(12px, env(safe-area-inset-left)); }
-.photography-next { right: max(12px, env(safe-area-inset-right)); }
-.photography-hint {
-  position: absolute;
-  inset: auto 0 0;
-  z-index: 3;
-  margin: 0;
-  padding: 32px 16px max(12px, env(safe-area-inset-bottom));
-  text-align: center;
-  font-size: 12px;
-  background: linear-gradient(transparent, rgba(0,0,0,.7));
-  pointer-events: none;
+/* Contain maximizes each image independently without cropping or distortion. */
+.photography-track img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  user-select: none;
 }
+.photography-nav { position: absolute; top: 50%; z-index: 3; transform: translateY(-50%); }
+.photography-previous { left: max(0px, env(safe-area-inset-left)); }
+.photography-next { right: max(0px, env(safe-area-inset-right)); }
 
 /* Long-form bilingual article reader. The images remain at reading size and
    scroll vertically, while the Chinese and English columns stay side by side. */

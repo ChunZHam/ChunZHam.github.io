@@ -27,6 +27,7 @@
       const img = new Image();
       img.alt = 'Fushun documentary photograph ' + (current + 1);
       img.decoding = 'async';
+      img.draggable = false;
       item = { img, state: 'loading' };
       visited.set(current, item);
       img.onload = function () {
@@ -48,6 +49,15 @@
     if (item.state === 'error') {
       progress.textContent = 'Unable to load this photo. Click to continue.';
     }
+  }
+
+  function advancePhoto(direction) {
+    // Explicitly wrap in both directions, including after cached images are reused.
+    const last = files.length - 1;
+    const index = direction > 0
+      ? (current === last ? 0 : current + 1)
+      : (current === 0 ? last : current - 1);
+    showPhoto(index);
   }
 
   function showGallery() {
@@ -76,15 +86,15 @@
       showGallery();
     });
   });
-  track.addEventListener('click', () => showPhoto(current + 1));
-  previous.addEventListener('click', () => showPhoto(current - 1));
-  next.addEventListener('click', () => showPhoto(current + 1));
+  track.addEventListener('click', () => advancePhoto(1));
+  previous.addEventListener('click', () => advancePhoto(-1));
+  next.addEventListener('click', () => advancePhoto(1));
   close.addEventListener('click', hideGallery);
   gallery.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') hideGallery();
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
       event.preventDefault();
-      showPhoto(current + (event.key === 'ArrowRight' ? 1 : -1));
+      advancePhoto(event.key === 'ArrowRight' ? 1 : -1);
     }
     if (event.key === 'Tab') {
       if (event.shiftKey && document.activeElement === close) {
